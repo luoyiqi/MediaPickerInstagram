@@ -14,7 +14,7 @@ import com.octopepper.mediapickerinstagram.commons.adapters.ViewWrapper;
 import java.io.File;
 import java.lang.ref.WeakReference;
 
-public class GridAdapter extends RecyclerViewAdapterBase<File, MediaItemView> {
+class GridAdapter extends RecyclerViewAdapterBase<File, MediaItemView> implements MediaItemViewListener {
 
     private final Context context;
 
@@ -36,21 +36,8 @@ public class GridAdapter extends RecyclerViewAdapterBase<File, MediaItemView> {
     @Override
     public void onBindViewHolder(ViewWrapper<MediaItemView> viewHolder, final int position) {
         MediaItemView itemView = viewHolder.getView();
+        itemView.setListener(this);
         itemView.bind(mItems.get(position));
-        viewHolder.itemView.setOnClickListener(onClickItem(position));
-    }
-
-    private View.OnClickListener onClickItem(final int position) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onItemClicked(position);
-            }
-        };
-    }
-
-    private void onItemClicked(int position) {
-        mWrListener.get().onClickMediaItem(mItems.get(position));
     }
 
     @Override
@@ -58,4 +45,8 @@ public class GridAdapter extends RecyclerViewAdapterBase<File, MediaItemView> {
         return 0;
     }
 
+    @Override
+    public void onClickItem(File file) {
+        mWrListener.get().onClickMediaItem(file);
+    }
 }

@@ -17,7 +17,7 @@ public class LoadMoreModule {
     private Picasso sPicasso = null;
     private Runnable mSettlingResumeRunnable = null;
 
-    void LoadMoreUtils(RecyclerView r, LoadMoreModuleDelegate d, Context context) {
+    public void LoadMoreUtils(RecyclerView r, LoadMoreModuleDelegate d, Context context) {
         this.recyclerView = r;
         this.delegate = d;
 
@@ -34,7 +34,7 @@ public class LoadMoreModule {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 LinearLayoutManager llm = (LinearLayoutManager) recyclerView.getLayoutManager();
-                if (llm.findFirstVisibleItemPosition() >= (llm.getItemCount() / 3)) {
+                if (llm.findFirstVisibleItemPosition() >= (llm.getItemCount() / 5)) {
                     delegate.shouldLoadMore();
                 }
             }
