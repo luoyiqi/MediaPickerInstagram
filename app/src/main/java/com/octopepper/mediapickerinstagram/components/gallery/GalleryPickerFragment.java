@@ -8,7 +8,6 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +40,7 @@ public class GalleryPickerFragment extends Fragment implements GridAdapterListen
 
     private static final String EXTENSION_JPG = ".jpg";
     private static final String EXTENSION_JPEG = ".jpeg";
+    private static final String EXTENSION_PNG = ".png";
     private static final int PREVIEW_SIZE = 800;
     private static final int MARGING_GRID = 2;
     private static final int RANGE = 10;
@@ -137,8 +137,8 @@ public class GalleryPickerFragment extends Fragment implements GridAdapterListen
                 }
             } else {
                 if (file.getName().toLowerCase().endsWith(EXTENSION_JPG)
-                        || file.getName().toLowerCase().endsWith(EXTENSION_JPEG)) {
-                    Log.e("TEST", "File : " + file.getName());
+                        || file.getName().toLowerCase().endsWith(EXTENSION_JPEG)
+                        || file.getName().toLowerCase().endsWith(EXTENSION_PNG)) {
                     mFiles.add(file);
                 }
             }
