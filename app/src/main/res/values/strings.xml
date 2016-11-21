@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">MediaPickerIntagram</string>
+
+    <string name="tab_gallery">Gallery</string>
+    <string name="tab_photo">Photo</string>
+    <string name="tab_video">Video</string>
+
+    <string name="bt_next">Next</string>
+
+    <!-- ICON -->
+    <string name="icon_check" translatable="false">d</string>
+    <string name="icon_option_h" translatable="false">l</string>
+    <string name="icon_option_v" translatable="false">m</string>
+    <string name="icon_social" translatable="false">n</string>
+    <string name="icon_email" translatable="false">I</string>
+    <string name="icon_back_md" translatable="false">Z</string>
+    <string name="icon_close_md" translatable="false">0</string>
+    <string name="icon_share_md" translatable="false">1</string>
+    <string name="icon_circle_error" translatable="false">5</string>
+    <string name="icon_droid" translatable="false">7</string>
+</resources>

@@ -5,11 +5,11 @@
 .DS_Store
 
 # Android Studio File
-MediaPickerInstagram/.idea/
-MediaPickerInstagram/projectFilesBackup/
-MediaPickerInstagram/MediaPickerInstagram.iml
-MediaPickerInstagram/app/app.iml
-MediaPickerInstagram/captures/
+.idea/
+projectFilesBackup/
+MediaPickerInstagram.iml
+app/app.iml
+captures/
 
 # Files for the Dalvik VM
 *.dex
