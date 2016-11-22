@@ -1,7 +1,7 @@
 # MediaPickerInstagram
 
-![gallery](https://cloud.githubusercontent.com/assets/10350755/20519118/f0c8d126-b0a1-11e6-92d0-e7bd9b99ec35.jpg)![capture_photo](https://cloud.githubusercontent.com/assets/10350755/20519169/2337419c-b0a2-11e6-9b77-9612423495f6.jpg)
-![capture_video](https://cloud.githubusercontent.com/assets/10350755/20519170/233aacd8-b0a2-11e6-9868-651f2c67e8df.jpg)
+![gallery](https://cloud.githubusercontent.com/assets/10350755/20528651/5477cd8c-b0cd-11e6-8221-bb5242c64db3.png)![capture_photo](https://cloud.githubusercontent.com/assets/10350755/20528653/54fb6a48-b0cd-11e6-8a89-af9b08a79ff5.png)
+![capture_video](https://cloud.githubusercontent.com/assets/10350755/20528654/5540a90a-b0cd-11e6-8f60-f828ba28bd03.png)
 
 ## Project Structure
 ```
