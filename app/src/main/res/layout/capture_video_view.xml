@@ -16,8 +16,8 @@
         android:layout_below="@id/mCameraVideoView"
         android:gravity="center">
 
-        <View
-            android:id="@+id/btnTakePhoto"
+        <ImageView
+            android:id="@+id/mBtnTakeVideo"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center"

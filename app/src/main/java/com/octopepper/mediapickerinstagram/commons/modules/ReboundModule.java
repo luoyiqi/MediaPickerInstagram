@@ -1,5 +1,7 @@
 package com.octopepper.mediapickerinstagram.commons.modules;
 
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.facebook.rebound.SimpleSpringListener;
@@ -8,14 +10,16 @@ import com.facebook.rebound.SpringSystem;
 
 public class ReboundModule {
 
+    private ReboundModuleDelegate mDelegate;
     private SpringSystem mSpringSystem = null;
     private Spring mSpring = null;
 
-    private ReboundModule() {
+    private ReboundModule(ReboundModuleDelegate delegate) {
+        this.mDelegate = delegate;
     }
 
-    public static ReboundModule getInstance() {
-        return new ReboundModule();
+    public static ReboundModule getInstance(ReboundModuleDelegate delegate) {
+        return new ReboundModule(delegate);
     }
 
     public void init(ImageView imageView) {
@@ -26,10 +30,7 @@ public class ReboundModule {
             }
         }
         addListener(imageView);
-    }
-
-    public void setEndValue(int endValue) {
-        mSpring.setEndValue(endValue);
+        imageView.setOnTouchListener(addOnTouchListener());
     }
 
     private void addListener(final ImageView imageView) {
@@ -43,4 +44,24 @@ public class ReboundModule {
             }
         });
     }
+
+    private View.OnTouchListener addOnTouchListener() {
+        return new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        mSpring.setEndValue(1);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        mDelegate.onTouchActionUp();
+                    case MotionEvent.ACTION_CANCEL:
+                        mSpring.setEndValue(0);
+                        break;
+                }
+                return true;
+            }
+        };
+    }
+
 }

@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 
 import com.octopepper.mediapickerinstagram.R;
 import com.octopepper.mediapickerinstagram.commons.modules.ReboundModule;
+import com.octopepper.mediapickerinstagram.commons.modules.ReboundModuleDelegate;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -17,13 +18,13 @@ import java.lang.ref.WeakReference;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MediaItemView extends RelativeLayout {
+public class MediaItemView extends RelativeLayout implements ReboundModuleDelegate {
 
     @BindView(R.id.mMediaThumb)
     ImageView mMediaThumb;
 
     private File mCurrentFile;
-    private ReboundModule mReboundModule = ReboundModule.getInstance();
+    private ReboundModule mReboundModule = ReboundModule.getInstance(this);
     private WeakReference<MediaItemViewListener> mWrListener;
 
     void setListener(MediaItemViewListener listener) {
@@ -47,26 +48,6 @@ public class MediaItemView extends RelativeLayout {
                 .error(R.drawable.placeholder_error_media)
                 .noFade()
                 .into(mMediaThumb);
-        mMediaThumb.setOnTouchListener(addOnTouchListener());
-    }
-
-    private OnTouchListener addOnTouchListener() {
-        return new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        mReboundModule.setEndValue(1);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        mWrListener.get().onClickItem(mCurrentFile);
-                    case MotionEvent.ACTION_CANCEL:
-                        mReboundModule.setEndValue(0);
-                        break;
-                }
-                return true;
-            }
-        };
     }
 
     @Override
@@ -74,4 +55,8 @@ public class MediaItemView extends RelativeLayout {
         super.onMeasure(widthMeasureSpec, widthMeasureSpec);
     }
 
+    @Override
+    public void onTouchActionUp() {
+        mWrListener.get().onClickItem(mCurrentFile);
+    }
 }
