@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.octopepper.mediapickerinstagram.commons.adapters.ViewPagerAdapter;
+import com.octopepper.mediapickerinstagram.commons.models.Session;
 import com.octopepper.mediapickerinstagram.commons.models.enums.SourceType;
 import com.octopepper.mediapickerinstagram.commons.modules.PermissionModule;
 import com.octopepper.mediapickerinstagram.commons.ui.ToolbarView;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarView.OnCli
     @BindString(R.string.tab_video)
     String _tabVideo;
 
+    private Session mSession = Session.getInstance();
     private HashSet<SourceType> mSourceTypeSet = new HashSet<>();
 
     private void initViews() {
@@ -120,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarView.OnCli
         setContentView(R.layout.main_view);
         ButterKnife.bind(this);
 
+        // If you want to start activity with custom Tab
         mSourceTypeSet.add(SourceType.Gallery);
         mSourceTypeSet.add(SourceType.Photo);
         mSourceTypeSet.add(SourceType.Video);
@@ -139,7 +142,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarView.OnCli
 
     @Override
     public void onClickNext() {
-
+        // Fetch file to upload
+        mSession.getFileToUpload();
     }
 
     @Override

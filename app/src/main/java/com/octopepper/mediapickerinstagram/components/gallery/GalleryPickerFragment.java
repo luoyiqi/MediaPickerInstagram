@@ -8,13 +8,13 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.octopepper.mediapickerinstagram.R;
+import com.octopepper.mediapickerinstagram.commons.models.Session;
 import com.octopepper.mediapickerinstagram.commons.modules.LoadMoreModule;
 import com.octopepper.mediapickerinstagram.commons.modules.LoadMoreModuleDelegate;
 import com.squareup.picasso.Picasso;
@@ -46,26 +46,30 @@ public class GalleryPickerFragment extends Fragment implements GridAdapterListen
     private static final int MARGING_GRID = 2;
     private static final int RANGE = 20;
 
+    private Session mSession = Session.getInstance();
+    private LoadMoreModule mLoadMoreModule = new LoadMoreModule();
     private GridAdapter mGridAdapter;
     private ArrayList<File> mFiles;
     private boolean isLoading = false;
-    private LoadMoreModule mLoadMoreModule = new LoadMoreModule();
-    private int mOffset = 0;
+    private int mOffset;
+    private boolean isFirstLoad = true;
 
     public static GalleryPickerFragment newInstance() {
         return new GalleryPickerFragment();
     }
 
     private void initViews() {
-        mGridAdapter = new GridAdapter(getContext());
+        if (isFirstLoad) {
+            mGridAdapter = new GridAdapter(getContext());
+        }
         mGridAdapter.setListener(this);
         mGalleryRecyclerView.setAdapter(mGridAdapter);
         mGalleryRecyclerView.setHasFixedSize(true);
         mGalleryRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         mGalleryRecyclerView.addItemDecoration(addItemDecoration());
         mLoadMoreModule.LoadMoreUtils(mGalleryRecyclerView, this, getContext());
+        mOffset = 0;
         fetchMedia();
-
     }
 
     private RecyclerView.ItemDecoration addItemDecoration() {
@@ -100,6 +104,7 @@ public class GalleryPickerFragment extends Fragment implements GridAdapterListen
             displayPreview(mFiles.get(0));
             mGridAdapter.setItems(getRangePets());
         }
+        isFirstLoad = false;
     }
 
     private List<File> getRangePets() {
@@ -140,7 +145,6 @@ public class GalleryPickerFragment extends Fragment implements GridAdapterListen
     }
 
     private void loadNext() {
-        Log.e("TEST", "Offset : " + mOffset);
         if (!isLoading) {
             isLoading = true;
             mOffset += RANGE;
@@ -156,10 +160,10 @@ public class GalleryPickerFragment extends Fragment implements GridAdapterListen
     private void displayPreview(File file) {
         Picasso.with(getContext())
                 .load(Uri.fromFile(file))
+                .noFade()
                 .noPlaceholder()
                 .resize(PREVIEW_SIZE, PREVIEW_SIZE)
                 .centerCrop()
-                .noFade()
                 .into(mPreview);
     }
 
@@ -177,8 +181,15 @@ public class GalleryPickerFragment extends Fragment implements GridAdapterListen
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        Picasso.with(getContext()).cancelRequest(mPreview);
+    }
+
+    @Override
     public void onClickMediaItem(File file) {
         displayPreview(file);
+        mSession.setFileToUpload(file);
         mAppBarContainer.setExpanded(true, true);
     }
 
