@@ -1,4 +1,4 @@
-# MediaPickerIntagram
+# MediaPickerInstagram
 
 ## Project Structure
 ```
@@ -8,21 +8,19 @@ assets/
 java/
   |- com/
   |  |- octopepper/
-  |  |  |- MediaPickerIntagram/
+  |  |  |- mediapickerinstagram/
   |  |  |  |- commons/
   |  |  |  |- components/
   |  |  |  |- MainActivity.java
   |  |  |  |- MainApplication.java
 res/
   |- drawable/
-  |- drawable-hdpi/
-  |- drawable-mdpi/
-  |- drawable-xhdpi/
-  |- drawable-xxhdpi/
-  |- drawable-xxxhdpi/
   |- layout/
-  |- layout-v21/
-  |- menu/
+  |- mipmap-hdpi/
+  |- mipmap-mdpi/
+  |- mipmap-xhdpi/
+  |- mipmap-xxhdpi/
+  |- mipmap-xxxhdpi/
   |- values/
   |- values-v21/
   |- values-w820dp/
