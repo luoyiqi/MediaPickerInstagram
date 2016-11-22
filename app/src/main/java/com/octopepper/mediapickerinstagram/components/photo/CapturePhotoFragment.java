@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -67,6 +68,7 @@ public class CapturePhotoFragment extends Fragment {
     private int mCurrentFlash;
     private Handler mBackgroundHandler;
     private Session mSession = Session.getInstance();
+    private CapturePhotoFragmentListener listener;
 
     @OnClick(R.id.mBtnTakePhoto)
     void onTakePhotoClick() {
@@ -189,6 +191,7 @@ public class CapturePhotoFragment extends Fragment {
                             }
                         }
                         mSession.setFileToUpload(file);
+                        listener.openEditor();
                     }
                 }
             });
@@ -223,6 +226,16 @@ public class CapturePhotoFragment extends Fragment {
                 mBackgroundHandler.getLooper().quit();
             }
             mBackgroundHandler = null;
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            listener = (CapturePhotoFragmentListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement CapturePhotoFragmentListener");
         }
     }
 

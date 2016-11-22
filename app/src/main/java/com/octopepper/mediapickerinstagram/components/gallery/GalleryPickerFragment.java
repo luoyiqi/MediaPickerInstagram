@@ -158,6 +158,7 @@ public class GalleryPickerFragment extends Fragment implements GridAdapterListen
     }
 
     private void displayPreview(File file) {
+        mSession.setFileToUpload(file);
         Picasso.with(getContext())
                 .load(Uri.fromFile(file))
                 .noFade()
@@ -189,7 +190,6 @@ public class GalleryPickerFragment extends Fragment implements GridAdapterListen
     @Override
     public void onClickMediaItem(File file) {
         displayPreview(file);
-        mSession.setFileToUpload(file);
         mAppBarContainer.setExpanded(true, true);
     }
 

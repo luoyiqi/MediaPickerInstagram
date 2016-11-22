@@ -4,11 +4,11 @@
 
 ## Work In Progress
 
-* ~~Gallery picker~~
-* ImageView cropper
-* ~~Capture photo~~
-* Capture video
-* Editor photo
+- [X] ~~Gallery picker~~
+- [ ] ImageView cropper
+- [X] ~~Capture photo~~
+- [ ] Capture video
+- [ ] Editor photo
 
 ## Project Structure
 ```

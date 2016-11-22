@@ -10,10 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import com.octopepper.mediapickerinstagram.commons.adapters.ViewPagerAdapter;
 import com.octopepper.mediapickerinstagram.commons.models.Session;
 import com.octopepper.mediapickerinstagram.commons.models.enums.SourceType;
+import com.octopepper.mediapickerinstagram.commons.modules.NavigatorEditorModule;
 import com.octopepper.mediapickerinstagram.commons.modules.PermissionModule;
 import com.octopepper.mediapickerinstagram.commons.ui.ToolbarView;
 import com.octopepper.mediapickerinstagram.components.gallery.GalleryPickerFragment;
 import com.octopepper.mediapickerinstagram.components.photo.CapturePhotoFragment;
+import com.octopepper.mediapickerinstagram.components.photo.CapturePhotoFragmentListener;
 import com.octopepper.mediapickerinstagram.components.video.CaptureVideoFragment;
 
 import java.util.ArrayList;
@@ -24,14 +26,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements ToolbarView.OnClickTitleListener,
-        ToolbarView.OnClickNextListener, ToolbarView.OnClickBackListener {
+        ToolbarView.OnClickNextListener, ToolbarView.OnClickBackListener, CapturePhotoFragmentListener {
 
     @BindView(R.id.mMainTabLayout)
     TabLayout mMainTabLayout;
     @BindView(R.id.mMainViewPager)
     ViewPager mMainViewPager;
-    @BindView(R.id.mToolbar)
-    ToolbarView mToolbar;
+    @BindView(R.id.mMainToolbar)
+    ToolbarView mMainToolbar;
 
     @BindString(R.string.tab_gallery)
     String _tabGallery;
@@ -40,14 +42,14 @@ public class MainActivity extends AppCompatActivity implements ToolbarView.OnCli
     @BindString(R.string.tab_video)
     String _tabVideo;
 
-    private Session mSession = Session.getInstance();
     private HashSet<SourceType> mSourceTypeSet = new HashSet<>();
+    private Session mSession = Session.getInstance();
 
     private void initViews() {
         PermissionModule permissionModule = new PermissionModule(this);
         permissionModule.checkPermissions();
 
-        mToolbar.setOnClickBackMenuListener(this)
+        mMainToolbar.setOnClickBackMenuListener(this)
                 .setOnClickTitleListener(this)
                 .setOnClickNextListener(this);
 
@@ -74,23 +76,23 @@ public class MainActivity extends AppCompatActivity implements ToolbarView.OnCli
     private void displayTitleByTab(TabLayout.Tab tab) {
         if (tab.getText() != null) {
             String title = tab.getText().toString();
-            mToolbar.setTitle(title);
+            mMainToolbar.setTitle(title);
         }
     }
 
     private void initNextButtonByTab(int position) {
         switch (position) {
             case 0:
-                mToolbar.showNext();
+                mMainToolbar.showNext();
                 break;
             case 1:
-                mToolbar.hideNext();
+                mMainToolbar.hideNext();
                 break;
             case 2:
-                mToolbar.hideNext();
+                mMainToolbar.hideNext();
                 break;
             default:
-                mToolbar.hideNext();
+                mMainToolbar.hideNext();
                 break;
         }
     }
@@ -114,6 +116,10 @@ public class MainActivity extends AppCompatActivity implements ToolbarView.OnCli
         }
 
         return fragments;
+    }
+
+    private void openPhotoEditor() {
+        new NavigatorEditorModule(this).goTo();
     }
 
     @Override
@@ -142,12 +148,18 @@ public class MainActivity extends AppCompatActivity implements ToolbarView.OnCli
 
     @Override
     public void onClickNext() {
-        // Fetch file to upload
-        mSession.getFileToUpload();
+        if (mSession.getFileToUpload() != null) {
+            openPhotoEditor();
+        }
     }
 
     @Override
     public void onClickTitle() {
 
+    }
+
+    @Override
+    public void openEditor() {
+        openPhotoEditor();
     }
 }

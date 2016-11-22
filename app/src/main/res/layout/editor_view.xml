@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+    <com.octopepper.mediapickerinstagram.commons.ui.ToolbarView
+        android:id="@+id/mEditorToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="4dp"/>
+
+    <com.octopepper.mediapickerinstagram.commons.ui.CustomGLSurfaceView
+        android:id="@+id/mEffectSview"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_below="@id/mEditorToolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/mEffectSview"
+        android:gravity="center">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mEffectChooserRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

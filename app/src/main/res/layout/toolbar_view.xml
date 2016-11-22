@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="@string/bt_next"
+            android:text="@string/toolbar_bt_next"
             android:textColor="@color/green"
             android:textSize="18sp"
             app:customFont="Roboto-Regular" />
