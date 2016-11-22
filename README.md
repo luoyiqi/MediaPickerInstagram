@@ -24,8 +24,10 @@ java/
   |  |  |  |- MainActivity.java
   |  |  |  |- MainApplication.java
 res/
+  |- color/
   |- drawable/
   |- layout/
+  |- layout-v14/
   |- mipmap-hdpi/
   |- mipmap-mdpi/
   |- mipmap-xhdpi/
