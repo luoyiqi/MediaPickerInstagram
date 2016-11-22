@@ -27,6 +27,10 @@ public class PermissionModule {
                 != PackageManager.PERMISSION_GRANTED) {
             permissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
+        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED) {
+            permissionsNeeded.add(Manifest.permission.RECORD_AUDIO);
+        }
         if (!permissionsNeeded.isEmpty()) {
             requestPermission(permissionsNeeded.toArray(new String[permissionsNeeded.size()]));
         }
