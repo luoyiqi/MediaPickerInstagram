@@ -63,6 +63,8 @@ $ git commit -am "[... your message ...]"
 ## Libraries
 ### Core
 * Butter Knife --> [link](http://jakewharton.github.io/butterknife/)
+* Picasso --> [link](http://square.github.io/picasso/)
+* Rebound --> [link](http://facebook.github.io/rebound/)
 
 ## Naming Conventions
 ```java
