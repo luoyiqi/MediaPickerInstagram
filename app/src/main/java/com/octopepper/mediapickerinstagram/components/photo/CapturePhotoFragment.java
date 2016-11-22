@@ -39,7 +39,7 @@ public class CapturePhotoFragment extends Fragment {
 
     private static final Interpolator ACCELERATE_INTERPOLATOR = new AccelerateInterpolator();
     private static final Interpolator DECELERATE_INTERPOLATOR = new DecelerateInterpolator();
-    private static final String DIR_YUMMYPETS = "yummypets";
+    private static final String DIR_YUMMYPETS = "/yummypets";
 
     @BindView(R.id.mCameraPhotoView)
     CameraView mCameraPhotoView;
