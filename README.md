@@ -90,13 +90,5 @@ Android fragmentation analytics --> [Platform Versions](http://developer.android
 * Min API 16 --> Jelly Bean : 4.1.x
 * Max API 25 --> Nougat : 7.x.x
 
-## Material Design
-#### [Please! Read the specs.](https://material.google.com/)
-
-## Stay Tuned
-
-Android developer blog post --> [link](http://android-developers.blogspot.fr/)
-
-
 ## Contributors
 [NodensN](https://github.com/NodensN)
